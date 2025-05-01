@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Booklet Maker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Booklet Maker</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" name="pdf_file" accept=".pdf" required><br><br>
+
+            <label for="pages_per_sheet">Pages per sheet:</label>
+            <select name="pages_per_sheet" id="pages_per_sheet">
+                <option value="4">4 Pages</option>
+                <option value="8">8 Pages</option>
+                <option value="12">12 Pages</option>
+            </select><br><br>
+
+            <button type="submit">Create Booklet</button>
+        </form>
+    </div>
+</body>
+</html>
