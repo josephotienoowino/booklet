@@ -2,24 +2,209 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple Booklet Maker</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Booklet Maker</title>
+    <style>
+        
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Simple Booklet Maker</h1>
+        <header>
+            <h1>Advanced Booklet Maker</h1>
+            <p class="tagline">Create professional-looking booklets with custom headers and footers</p>
+        </header>
+        
         <form action="/" method="post" enctype="multipart/form-data">
-            <input type="file" name="pdf_file" accept=".pdf" required><br><br>
-
-            <label for="pages_per_sheet">Pages per sheet:</label>
-            <select name="pages_per_sheet" id="pages_per_sheet">
-                <option value="4">4 Pages</option>
-                <option value="8">8 Pages</option>
-                <option value="12">12 Pages</option>
-            </select><br><br>
-
+            <div class="form-section">
+                <h2 class="section-title">PDF Upload</h2>
+                <div class="form-group">
+                    <label for="pdf_file">Select PDF File:</label>
+                    <input type="file" name="pdf_file" id="pdf_file" accept=".pdf" required>
+                    <p class="help-text">Maximum file size: 50MB</p>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2 class="section-title">Booklet Layout</h2>
+                
+                <div class="form-group">
+                    <label for="pages_per_sheet">Pages per sheet:</label>
+                    <select name="pages_per_sheet" id="pages_per_sheet">
+                        <option value="2">2 Pages (Single fold)</option>
+                        <option value="4" selected>4 Pages (Standard booklet)</option>
+                        <option value="8">8 Pages</option>
+                        <option value="12">12 Pages</option>
+                        <option value="16">16 Pages</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="paper_size">Paper Size:</label>
+                    <select name="paper_size" id="paper_size">
+                        <option value="letter" selected>Letter (8.5" x 11")</option>
+                        <option value="a4">A4 (210mm x 297mm)</option>
+                        <option value="legal">Legal (8.5" x 14")</option>
+                        <option value="tabloid">Tabloid (11" x 17")</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orientation">Orientation:</label>
+                    <select name="orientation" id="orientation">
+                        <option value="portrait">Portrait</option>
+                        <option value="landscape" selected>Landscape</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="double_sided" name="double_sided" checked>
+                        <label for="double_sided">Double-sided printing</label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="auto_rotate" name="auto_rotate" checked>
+                        <label for="auto_rotate">Auto-rotate pages for optimal fit</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2 class="section-title">Header Options</h2>
+                
+                <div class="form-group">
+                    <label for="header_text">Header Text:</label>
+                    <input type="text" name="header_text" id="header_text" placeholder="Enter text for page headers">
+                </div>
+                
+                <div class="font-options">
+                    <div class="font-option-group">
+                        <label for="header_font">Font:</label>
+                        <select name="header_font" id="header_font">
+                            <option value="Arial">Arial</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Helvetica">Helvetica</option>
+                            <option value="Calibri">Calibri</option>
+                            <option value="Garamond">Garamond</option>
+                        </select>
+                    </div>
+                    
+                    <div class="font-option-group">
+                        <label for="header_size">Size:</label>
+                        <select name="header_size" id="header_size">
+                            <option value="8">8pt</option>
+                            <option value="10" selected>10pt</option>
+                            <option value="12">12pt</option>
+                            <option value="14">14pt</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="text-align-options">
+                    <div>
+                        <input type="radio" id="header_left" name="header_align" value="left" checked>
+                        <label for="header_left">Left</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="header_center" name="header_align" value="center">
+                        <label for="header_center">Center</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="header_right" name="header_align" value="right">
+                        <label for="header_right">Right</label>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="include_page_number_header" name="include_page_number_header">
+                    <label for="include_page_number_header">Include page number in header</label>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2 class="section-title">Footer Options</h2>
+                
+                <div class="form-group">
+                    <label for="footer_text">Footer Text:</label>
+                    <input type="text" name="footer_text" id="footer_text" placeholder="Enter text for page footers">
+                </div>
+                
+                <div class="font-options">
+                    <div class="font-option-group">
+                        <label for="footer_font">Font:</label>
+                        <select name="footer_font" id="footer_font">
+                            <option value="Arial">Arial</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Helvetica">Helvetica</option>
+                            <option value="Calibri">Calibri</option>
+                            <option value="Garamond">Garamond</option>
+                        </select>
+                    </div>
+                    
+                    <div class="font-option-group">
+                        <label for="footer_size">Size:</label>
+                        <select name="footer_size" id="footer_size">
+                            <option value="8">8pt</option>
+                            <option value="10" selected>10pt</option>
+                            <option value="12">12pt</option>
+                            <option value="14">14pt</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="text-align-options">
+                    <div>
+                        <input type="radio" id="footer_left" name="footer_align" value="left">
+                        <label for="footer_left">Left</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="footer_center" name="footer_align" value="center" checked>
+                        <label for="footer_center">Center</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="footer_right" name="footer_align" value="right">
+                        <label for="footer_right">Right</label>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="include_page_number_footer" name="include_page_number_footer" checked>
+                    <label for="include_page_number_footer">Include page number in footer</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="include_date" name="include_date">
+                    <label for="include_date">Include date in footer</label>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2 class="section-title">Advanced Options</h2>
+                
+                <div class="form-group">
+                    <label for="margin">Margins (mm):</label>
+                    <input type="number" name="margin" id="margin" min="0" max="50" value="10">
+                </div>
+                
+                <div class="form-group">
+                    <label for="binding_correction">Binding correction (mm):</label>
+                    <input type="number" name="binding_correction" id="binding_correction" min="0" max="20" value="0">
+                    <p class="help-text">Additional space for binding. Increases inner margins.</p>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="crop_marks" name="crop_marks">
+                    <label for="crop_marks">Include crop marks</label>
+                </div>
+            </div>
+            
             <button type="submit">Create Booklet</button>
         </form>
+        
+        <footer>
+            <p>Advanced Booklet Maker &copy; 2025 | All rights reserved</p>
+        </footer>
     </div>
 </body>
 </html>
